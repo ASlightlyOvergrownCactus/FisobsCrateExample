@@ -12,6 +12,12 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Fisobs">
+      <HintPath>..\..\..\..\Downloads\Fisobs (1).dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
   <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="Exists('$(RainWorldDir)')">
     <ItemGroup>
       <Assets Include="$(ProjectDir)../assets/**/*.*" />
