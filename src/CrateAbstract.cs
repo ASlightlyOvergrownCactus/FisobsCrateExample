@@ -5,13 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Fisobs.Core;
-using UnityEngine;
 
 namespace TestMod
 {
     sealed class CrateAbstract : AbstractPhysicalObject
     {
-        public CrateAbstract(World world, WorldCoordinate pos, EntityID ID) : base(world, CrateFisobs.Crate, null, pos, ID)
+        public CrateAbstract(World world, WorldCoordinate pos, EntityID ID) : base(world, CrateFisobs.AbstrCrate, null, pos, ID)
         {
             scaleX = 1;
             scaleY = 1;

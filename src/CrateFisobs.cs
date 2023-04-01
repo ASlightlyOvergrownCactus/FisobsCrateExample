@@ -13,16 +13,16 @@ namespace TestMod
 {
     sealed class CrateFisobs : Fisob
     {
-        public static readonly AbstractPhysicalObject.AbstractObjectType Crate = new("Crate", true);
-        public static readonly MultiplayerUnlocks.SandboxUnlockID MetalCrate = new("Crate", true);
+        public static readonly AbstractPhysicalObject.AbstractObjectType AbstrCrate = new("Crate", true);
+        public static readonly MultiplayerUnlocks.SandboxUnlockID mCrate = new("Crate", true);
 
-        public CrateFisobs() : base(Crate)
+        public CrateFisobs() : base(AbstrCrate)
         {
             Icon = new CrateIcon();
 
             SandboxPerformanceCost = new(linear: 0.35f, exponential: 0f);
 
-            RegisterUnlock(MetalCrate, parent: MultiplayerUnlocks.SandboxUnlockID.Slugcat, data: 0);
+            RegisterUnlock(mCrate, parent: MultiplayerUnlocks.SandboxUnlockID.Slugcat, data: 0);
         }
 
         public override AbstractPhysicalObject Parse(World world, EntitySaveData saveData, SandboxUnlock? unlock)

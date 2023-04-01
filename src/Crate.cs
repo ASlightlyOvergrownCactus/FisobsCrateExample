@@ -6,8 +6,6 @@ namespace TestMod
 {
     sealed class Crate : PhysicalObject, IDrawable
     {
-        public float lastDarkness = -1f;
-
         public Crate(CrateAbstract abstr) : base(abstr)
         {
             float mass = 40f;
@@ -17,9 +15,11 @@ namespace TestMod
             {
                 for (int y = -1; y <= 1; y++)
                 {
-                    positions.Add(new Vector2(x, y) * 20f);
+                    positions.Add(new Vector2(x, y) * 20);
                 }
             }
+
+            
 
             bodyChunks = new BodyChunk[positions.Count];
 
@@ -32,10 +32,12 @@ namespace TestMod
             // Scale up the middle chunk
             bodyChunks[4].rad = 40f;
 
+           
             bodyChunkConnections = new BodyChunkConnection[bodyChunks.Length * (bodyChunks.Length - 1) / 2];
             int connection = 0;
 
             // Create all chunk connections
+            
             for (int x = 0; x < bodyChunks.Length; x++)
             {
                 for (int y = x + 1; y < bodyChunks.Length; y++)
@@ -49,11 +51,22 @@ namespace TestMod
             airFriction = 0.999f;
             gravity = 0.9f;
             bounce = 0.3f;
-            surfaceFriction = 1f;
+            surfaceFriction = 0.5f;
             collisionLayer = 1;
             waterFriction = 0.92f;
             buoyancy = 0.75f;
             GoThroughFloors = false;
+        }
+
+        public override void Update(bool eu)
+        {
+            base.Update(eu);
+
+            if (grabbedBy.Count == 0)
+            {
+                // Slows crate down to stop the "slipperyness" that it has when slippin' accross the floor
+                bodyChunks[0].vel = new Vector2(bodyChunks[0].vel.x * 0.65f, bodyChunks[0].vel.y);
+            }
         }
 
         public override void PlaceInRoom(Room placeRoom)
@@ -71,6 +84,29 @@ namespace TestMod
                     i++;
                 }
             }
+        }
+
+        public override void Collide(PhysicalObject otherObject, int myChunk, int otherChunk)
+        {
+            base.Collide(otherObject, myChunk, otherChunk);
+            if (otherObject.bodyChunks[otherChunk].owner is Creature creature && !creature.dead)
+            {
+                float damage = (this.bodyChunks[myChunk].vel.x + this.bodyChunks[myChunk].vel.y) / 2;
+                if (damage < 0)
+                {
+                    damage *= -1;
+                }
+                else if (damage < 1)
+                {
+                    // Don't deal damage
+                }
+                else
+                {
+                    creature.Violence(this.bodyChunks[myChunk], this.bodyChunks[myChunk].vel, otherObject.bodyChunks[otherChunk], null, Creature.DamageType.Blunt, damage, 5f);
+                    //Debug.Log("Crate collision damage: " + damage);
+                }
+            }
+
         }
 
         public override void TerrainImpact(int chunk, IntVector2 direction, float speed, bool firstContact)
@@ -104,10 +140,6 @@ namespace TestMod
 
             if (slatedForDeletetion || room != rCam.room)
                 sLeaser.CleanSpritesAndRemove();
-            
-            // TODO: Add the sprite for this back
-            // Typically, Rain World objects use fully white sprites, then color them via code. This allows them to change based on the palette and animate in cool ways
-            // Sprite angle can be gotten by taking the angle from the center chunk to one of the outside ones, or taking the angle for all of them and using some sort of average
         }
 
         public void ApplyPalette(RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam, RoomPalette palette)
