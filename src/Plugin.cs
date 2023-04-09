@@ -28,7 +28,11 @@ sealed class Plugin : BaseUnityPlugin
     public void OnEnable()
     {
             Content.Register(new CrateFisobs());
+
+            
     }
+
+
 
 }
 

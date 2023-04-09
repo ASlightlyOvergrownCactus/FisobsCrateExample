@@ -26,7 +26,7 @@ namespace TestMod
             // Create all body chunks
             for(int i = 0; i < bodyChunks.Length; i++)
             {
-                bodyChunks[i] = new BodyChunk(this, i, new Vector2(), 30f, mass / bodyChunks.Length);
+                bodyChunks[i] = new BodyChunk(this, i, Vector2.zero, 30f, mass / bodyChunks.Length);
             }
 
             // Scale up the middle chunk
@@ -46,7 +46,7 @@ namespace TestMod
                     connection++;
                 }
             }
-
+            
 
             airFriction = 0.999f;
             gravity = 0.9f;
@@ -65,7 +65,7 @@ namespace TestMod
             if (grabbedBy.Count == 0)
             {
                 // Slows crate down to stop the "slipperyness" that it has when slippin' accross the floor
-                bodyChunks[0].vel = new Vector2(bodyChunks[0].vel.x * 0.65f, bodyChunks[0].vel.y);
+                bodyChunks[0].vel = new Vector2(bodyChunks[0].vel.x *= 0.65f, bodyChunks[0].vel.y);
             }
         }
 

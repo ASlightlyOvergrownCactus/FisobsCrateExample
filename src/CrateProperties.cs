@@ -17,14 +17,8 @@ namespace TestMod
         {
             // The player should only be able to grab one Crate at a time
 
-            if (player.grasps.Any(g => g?.grabbed is Crate))
-            {
-                grabability = Player.ObjectGrabability.CantGrab;
-            }
-            else
-            {
                 grabability = Player.ObjectGrabability.TwoHands;
-            }
+
         }
 
     }
