@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace TestMod
 {
-    sealed class CrateIcon : Icon
+    public class CrateIcon : Icon
     {
         public override int Data(AbstractPhysicalObject apo)
         {
