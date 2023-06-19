@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TestMod
 {
-    sealed class Crate : PhysicalObject, IDrawable
+    public class Crate : PhysicalObject, IDrawable
     {
         public Crate(CrateAbstract abstr) : base(abstr)
         {
