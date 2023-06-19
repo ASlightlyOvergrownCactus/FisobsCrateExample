@@ -23,7 +23,7 @@ namespace TestMod
 // See https://rainworldmodding.miraheze.org/wiki/Downpour_Reference/Mod_Directories
 
 [BepInPlugin("cactus.testMod", "Test Mod - Crate", "0.1.0")]
-sealed class Plugin : BaseUnityPlugin
+public class Plugin : BaseUnityPlugin
 {
     public void OnEnable()
     {
