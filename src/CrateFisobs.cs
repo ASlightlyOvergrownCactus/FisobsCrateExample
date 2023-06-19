@@ -11,7 +11,7 @@ using Fisobs.Sandbox;
 
 namespace TestMod
 {
-    sealed class CrateFisobs : Fisob
+    public class CrateFisobs : Fisob
     {
         public static readonly AbstractPhysicalObject.AbstractObjectType AbstrCrate = new("Crate", true);
         public static readonly MultiplayerUnlocks.SandboxUnlockID mCrate = new("Crate", true);
