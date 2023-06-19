@@ -8,7 +8,7 @@ using Fisobs.Properties;
 
 namespace TestMod
 {
-    sealed class CrateProperties : ItemProperties
+    public class CrateProperties : ItemProperties
     {
         public override void Throwable(Player player, ref bool throwable)
         => throwable = false;
